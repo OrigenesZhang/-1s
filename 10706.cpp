@@ -11,7 +11,7 @@ long long fast_pow(int k){
 	}
 	return product;
 }
-void init(int pos){
+void init(int pos){//应该打完表直接写在s里面这样可以少个函数
     long long st, en, modi=0;
     st=pos*fast_pow(pos-1);
     en=pos*(fast_pow(pos)-1);
@@ -24,7 +24,7 @@ void init(int pos){
 int main(){
     s[0]=0, s[1]=45;
     a[0]=1, a[1]=11, a[2]=192, a[3]=2893, a[4]=38894;
-    b[1]=9, b[2]=180, b[3]=2700, b[4]=36000;
+    b[1]=9, b[2]=180, b[3]=2700, b[4]=36000;//就是这个b[4]少打一个0害得我de了一个下午
     for(int i=2; i<=4; i++) init(i);
     cin>>t;
     while(t--){
