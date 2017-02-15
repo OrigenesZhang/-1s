@@ -26,7 +26,7 @@ agency cost_cal(agency x, int N, int M){
     while(N>M){
         if(N/2>=M){
             if(x.a*(N+1)/2>x.b) x.cost+=x.b;
-            else x.cost+=x.a*((N+1)/2);
+            else x.cost+=x.a*((N+1)/2);//优先级
             N/=2;
         }else{
             x.cost+=x.a*(N-M);
@@ -40,7 +40,7 @@ int main(){
     for(int i=1; i<=Cases; i++){
         int N, M, L;
         cin>>N>>M>>L;
-        cin.get();
+        cin.get();//第一个回车
         for(int j=0; j<L; j++){
             llist[j].input();
             llist[j]=cost_cal(llist[j], N, M);
