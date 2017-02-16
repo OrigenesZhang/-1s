@@ -15,8 +15,8 @@ int main(){
         cin>>tmp;
         int cur=0;
         while(cur<tmp.length()){
-            s.push_back(tmp[cur]);
-            alphabet[tmp[cur++]-'a']^=1;
+            s.push_back(tmp.at(cur));
+            alphabet[tmp.at(cur++)-'a']^=1;
         }//我也不知道为什么要这么写但是不这么写就会T会给输入搞lol
         int sz=s.size(), tot=0;
         if(sz&1){
