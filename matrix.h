@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 struct parametre{int c, r;};
 struct Matrix{
     long long matrix[maxn][maxn];
