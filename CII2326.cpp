@@ -1,5 +1,5 @@
 //Taejon regional 2001;
-//The problem can also be solved greedly;
+//The problem can also be solved greedily;
 //The algorithm is to count the times that segiments pass a specific point;
 #include <iostream>
 #include <cstring>
