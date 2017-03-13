@@ -22,7 +22,7 @@ int main(){
         if(!N) break;
         for(int i=1; i<=N; i++)
             cin>>A[i].r>>A[i].c;
-        long long int dp[11][11];
+        long long dp[11][11];
         for(int i=1; i<N; i++){
             dp[i][i+1]=A[i].r*A[i].c*A[i+1].c;
             dp[i][i]=dp[i+1][i+1]=0;
