@@ -9,7 +9,6 @@ int main(){
         for(int i=0; i<N; i++)
             cin>>table[i];
         v.clear();
-        int sz=1;
         v.push_back(table[0]);
         dp1[0]=1;
         for(int i=1; i<N; i++){
@@ -24,7 +23,6 @@ int main(){
         }
         v.clear();
         v.push_back(table[N-1]);
-        sz=1;
         dp2[N-1]=1;
         for(int i=N-2; i>=0; i--){
             if(table[i]>v.back()){
