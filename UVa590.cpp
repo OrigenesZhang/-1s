@@ -27,10 +27,10 @@ int main(){
                 }
             }
         }
-        if(cs>1) cout<<endl;
         cout<<"Scenario #"<<cs++<<endl;
         if(dp[k][n]<0) cout<<"No flight possible."<<endl;
         else cout<<"The best flight costs "<<dp[k][n]<<"."<<endl;
+        cout<<endl;
     }
     return 0;
 }
