@@ -10,7 +10,7 @@ int main(){
         for(int i=0; i<m; i++)
             cin>>w1[i]>>w2[i];
         memset(dp, -1, sizeof(dp));
-        dp[0][0] = 0;
+        dp[0][0]=0;
         for(int i=0; i<m; i++)
             for(int v1=w1[i]; v1<=S; v1++)
                 for(int v2=w2[i]; v2<=S; v2++)
