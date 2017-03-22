@@ -39,7 +39,7 @@ int main(){
                 if(dp[i-1][j]<0) continue;
                 for(int k=max(d[i+1]+d[i]-j, 0); k<=200-j+d[i]; k++)
                     if(dp[i][j-d[i]+k]<0) dp[i][j-d[i]+k]=dp[i-1][j]+k*p[i];
-                    //else dp[i][j-d[i]+k]=min(dp[i][j-d[i]+k], dp[i-1][j]+k*p[i]);
+                    else dp[i][j-d[i]+k]=min(dp[i][j-d[i]+k], dp[i-1][j]+k*p[i]);
             }
         }
         if(dp[N][100+d[N+1]]<0) cout<<"Impossible"<<endl;
