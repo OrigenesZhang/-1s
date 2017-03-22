@@ -33,12 +33,12 @@ void print(int l, int r){
 }
 int main(){
     while(getline(cin, s)){
-        int N=s.length();
+        N=s.length()-1;
         memset(vis, false, sizeof(vis));
         memset(dp, 0x3f, sizeof(dp));
-        dfs(0, N-1);
-        cout<<dp[0][N-1]<<' ';
-        print(0, N-1);
+        dfs(0, N);
+        cout<<dp[0][N]<<' ';
+        print(0, N);
         cout<<endl;
     }
     return 0;
