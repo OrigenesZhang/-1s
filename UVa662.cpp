@@ -1,16 +1,16 @@
-#include<iostream>
-#include<algorithm>
-#include<cstring>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
 using namespace std;
 int n, k, d[250], dp[250][35], s[250][250], mark[250][250], mid[250][250], cnt, cs=1;
-void print(int l, int r) {
+void print(int l, int r){
     if(l<1||r<1) return;
     print(mark[l][r]-1, r-1);
     cout<<"Depot "<<cnt++<<" at restaurant "<<mid[mark[l][r]][l]<<" serves restaurant";
     if(mark[l][r]==l) cout<<' '<<l<<endl;
     else cout<<"s "<<mark[l][r]<<" to "<<l<<endl;
 }
-int main() {
+int main(){
     while(cin>>n>>k){
         if(!n&&!k) break;
         for(int i=1; i<=n; i++)
