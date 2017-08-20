@@ -1,3 +1,5 @@
+#2008 World Final Problem B
+#nth equation has got at most n distinct root, therefore if we could prove the equation is held for n+1 numbers, it is always true
 case=0
 while True:
     case+=1
