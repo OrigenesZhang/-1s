@@ -13,7 +13,11 @@ int main(){
     while(k--){
         cin>>n>>t>>p;
         int r=t-n*p;
-        cout<<combinaton(n+r-1, n-1);
+        if(r<0){
+            cout<<0<<endl;
+            continue;
+        }
+        cout<<combinaton(n+r-1, n-1)<<endl;
     }
     return 0;
 }
