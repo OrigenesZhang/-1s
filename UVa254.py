@@ -34,6 +34,6 @@ while True:
         continue
     a, b, c=hanoi(m, n, a, b, c)
     if n&1:
-        print(a, c, b)
+        print(a, c, b)#这个输出简直有毛病,n为奇数和偶数移动的目标不一样
     else:
         print(a, b, c)
