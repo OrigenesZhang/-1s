@@ -1,3 +1,4 @@
+//MST Prim Algorithm
 #include <iostream>
 #include <cmath>
 #include <cstring>
