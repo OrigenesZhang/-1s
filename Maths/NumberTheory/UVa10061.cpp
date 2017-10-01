@@ -44,7 +44,7 @@ int main(){
 		for(int i=2; i<=N; i++)
 			t+=log10(i);
 		t/=log10(B);
-		cout<<(int)(floor(t+1e-9)+1)<<endl;//floor是一个double转int的函数但是输出如果位数高默认转成double...
+		cout<<(int)(floor(t+1e-9)+1)<<endl;//floor是一个double转int的函数但是返回值为double...
 	}
 	return 0;
 }
