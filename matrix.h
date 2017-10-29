@@ -46,6 +46,6 @@ Matrix BigMatrixExpo(Matrix &A, long long n){
     return C;
 }
 //定义新矩阵 Matrix a(3, 5); a.matrix={{},{},{}};
-//乘法 c=a*b; 注意a的第二个parametre等于b的第一个parametre;
+//乘法 c=a*b; 注意a的第一个parametre等于b的第二个parametre;
 //加法 c=a+b;
 //输出 c.print();
