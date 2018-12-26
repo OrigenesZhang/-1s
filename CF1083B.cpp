@@ -42,5 +42,5 @@ int main() {
         dp[i] = min(ll(1e9), dp[i]);
         ans += min(dp[i], ll(k));
     }
-    printf("%lld", ans);
+    printf("%lld\n", ans);
 }
