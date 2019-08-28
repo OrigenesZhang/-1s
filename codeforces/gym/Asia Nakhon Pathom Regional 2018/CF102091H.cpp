@@ -19,21 +19,21 @@ typedef pair<int, int> pii;
 #define chkmax(a, b) a = max(a, b)
  
 void solve() {
-    int n;
-    scanf("%d", &n);
-    vector<int> h(n);
-    for (auto &x : h) scanf("%d", &x);
-    int ans = 0, pre = -100;
-    REP(i, n) {
-        if (abs(h[i] - pre) > 10) {
-            ans++;
-            pre = h[i] + 10;
+    int n1, n2, n3, nm, x1, x2, x3;
+    scanf("%d%d%d", &n1, &n2, &n3);
+    scanf("%d%d%d", &x1, &x2, &x3);
+    nm = min(min(n1, n2), n3);
+    REP(i, nm) {
+        long long p = ll(i) * i * i;
+        if (p % n1 == x1 && p % n2 == x2 && p % n3 == x3) {
+            printf("%d\n", i);
+            return;
         }
     }
-    printf("%d\n", ans);
 }
  
 int main() {
-    int T; scanf("%d", &T);
+    int T;
+    scanf("%d", &T);
     while (T--) solve();
 }
