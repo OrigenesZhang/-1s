@@ -19,64 +19,48 @@ typedef pair<int, int> pii;
 #define chkmin(a, b) a = min(a, b)
 #define chkmax(a, b) a = max(a, b)
 
-const int maxn = 312345;
+const int maxn = 212345;
 
-int n, a[maxn], st[maxn], last[maxn], fen[maxn];
-vector<int> G[maxn];
+int q, n;
+ll p[maxn];
+ll x, a, y, b, c, k;
 
-int lowbit(int x) {
-  return x & -x;
-}
-
-int query(int x) {
-  int ret = 0;
-  while (x) {
-    ret += fen[x];
-    x -= lowbit(x);
-  }
-  return ret;
-}
-
-void add(int x, int d) {
-  while (x <= n) {
-    fen[x] += d;
-    x += lowbit(x);
-  }
+bool check(int up) {
+  int j = up / c;
+  ll ans = 0;
+  FOR(i, 1, j) ans += p[i] / 100 * (x + y);
+  j += up / a - up / c;
+  FOR(i, up / c + 1, j) ans += p[i] / 100 * x;
+  j += up / b - up / c;
+  FOR(i, up / a + 1, j) ans += p[i] / 100 * y;
+  return ans >= k;
 }
 
 void solve() {
   scanf("%d", &n);
-  fill(st + 1, st + n + 1, n + 1);
-  fill(last + 1, last + n + 1, 0);
-  fill(fen + 1, fen + n + 1, 0);
-  FOR(i, 1, n) G[i].clear();
-  FOR(i, 1, n) {
-    scanf("%d", a + i);
-    chkmin(st[a[i]], i);
-    chkmax(last[a[i]], i);
-    G[a[i]].eb(i);
+  FOR(i, 1, n) scanf("%lld", p + i);
+  sort(p + 1, p + n + 1, greater<>());
+  scanf("%lld%lld%lld%lld", &x, &a, &y, &b);
+  scanf("%lld", &k);
+  if (x < y) {
+    swap(x, y);
+    swap(a, b);
   }
-  int ans = 0, cnt = 0, j = n, tot = 0;
-  ROF(i, n, 1) if (st[i] <= n) {
-    while (j) {
-      if (st[j] > n) {
-        j--;
-        continue;
-      }
-      if (query(last[j])) break;
-      for (auto u : G[j]) add(u, 1);
-      j--;
-      tot++;
-    }
-    chkmax(ans, tot);
-    cnt++;
-    for (auto u : G[i]) add(u, -1);
-    tot--;
+  c = a / __gcd(a, b) * b;
+  if (!check(n)) {
+    puts("-1");
+    return;
   }
-  printf("%d\n", cnt - ans);
+  int lo = 1, hi = n;
+  while (lo < hi) {
+    int mi = lo + hi >> 1;
+    if (check(mi)) hi = mi;
+    else lo = mi + 1;
+  }
+  printf("%d\n", lo);
 }
 
 int main() {
-  int q; scanf("%d", &q);
+  scanf("%d", &q);
   while (q--) solve();
 }

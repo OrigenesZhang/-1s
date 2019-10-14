@@ -19,45 +19,61 @@ typedef pair<int, int> pii;
 #define chkmin(a, b) a = min(a, b)
 #define chkmax(a, b) a = max(a, b)
 
-const int maxn = 512345;
+const int maxn = 312345;
 
-int n, k;
-ll f[maxn][2];
-vector<pii> G[maxn];
+int n, a[maxn], st[maxn], last[maxn], fen[maxn];
+vector<int> G[maxn];
 
-void dfs(int u, int par) {
-  vector<pair<ll, int>> ch;
-  ll base = 0;
-  for (auto _ : G[u]) {
-    int v = _._1, w = _._2;
-    if (v == par) continue;
-    dfs(v, u);
-    base += max(f[v][0], f[v][1]);
-    ch.eb(w + f[v][1] - f[v][0], v);
+int lowbit(int x) {
+  return x & -x;
+}
+
+int query(int x) {
+  int ret = 0;
+  while (x) {
+    ret += fen[x];
+    x -= lowbit(x);
   }
-  f[u][0] = f[u][1] = base;
-  sort(all(ch), greater<>());
-  REP(i, min(int(ch.size()), k - 1)) {
-    if (ch[i]._1 <= 0) return;
-    f[u][0] += ch[i]._1, f[u][1] += ch[i]._1;
+  return ret;
+}
+
+void add(int x, int d) {
+  while (x <= n) {
+    fen[x] += d;
+    x += lowbit(x);
   }
-  if (ch.size() >= k && ch[k - 1]._1 > 0) f[u][0] += ch[k - 1]._1;
 }
 
 void solve() {
-  scanf("%d%d", &n, &k);
+  scanf("%d", &n);
+  fill(st + 1, st + n + 1, n + 1);
+  fill(last + 1, last + n + 1, 0);
+  fill(fen + 1, fen + n + 1, 0);
+  FOR(i, 1, n) G[i].clear();
   FOR(i, 1, n) {
-    G[i].clear();
-    reset(f[i], 0);
+    scanf("%d", a + i);
+    chkmin(st[a[i]], i);
+    chkmax(last[a[i]], i);
+    G[a[i]].eb(i);
   }
-  REP(i, n - 1) {
-    int u, v, w;
-    scanf("%d%d%d", &u, &v, &w);
-    G[u].eb(v, w);
-    G[v].eb(u, w);
+  int ans = 0, cnt = 0, j = n, tot = 0;
+  ROF(i, n, 1) if (st[i] <= n) {
+    while (j) {
+      if (st[j] > n) {
+        j--;
+        continue;
+      }
+      if (query(last[j])) break;
+      for (auto u : G[j]) add(u, 1);
+      j--;
+      tot++;
+    }
+    chkmax(ans, tot);
+    cnt++;
+    for (auto u : G[i]) add(u, -1);
+    tot--;
   }
-  dfs(1, 0);
-  printf("%lld\n", max(f[1][0], f[1][1]));
+  printf("%d\n", cnt - ans);
 }
 
 int main() {

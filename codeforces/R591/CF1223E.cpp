@@ -19,31 +19,45 @@ typedef pair<int, int> pii;
 #define chkmin(a, b) a = min(a, b)
 #define chkmax(a, b) a = max(a, b)
 
-const int maxn = 312345;
+const int maxn = 512345;
 
-int n, a[maxn], f[maxn];
-map<int, int> mmap[maxn];
+int n, k;
+ll f[maxn][2];
+vector<pii> G[maxn];
+
+void dfs(int u, int par) {
+  vector<pair<ll, int>> ch;
+  ll base = 0;
+  for (auto _ : G[u]) {
+    int v = _._1, w = _._2;
+    if (v == par) continue;
+    dfs(v, u);
+    base += max(f[v][0], f[v][1]);
+    ch.eb(w + f[v][1] - f[v][0], v);
+  }
+  f[u][0] = f[u][1] = base;
+  sort(all(ch), greater<>());
+  REP(i, min(int(ch.size()), k - 1)) {
+    if (ch[i]._1 <= 0) return;
+    f[u][0] += ch[i]._1, f[u][1] += ch[i]._1;
+  }
+  if (ch.size() >= k && ch[k - 1]._1 > 0) f[u][0] += ch[k - 1]._1;
+}
 
 void solve() {
-  scanf("%d", &n);
-  mmap[0].clear();
+  scanf("%d%d", &n, &k);
   FOR(i, 1, n) {
-    scanf("%d", a + i);
-    mmap[i].clear();
+    G[i].clear();
+    reset(f[i], 0);
   }
-  ll ans = 0;
-  fill(f + 1, f + n + 1, 0);
-  FOR(i, 1, n) {
-    int j = -1;
-    if (mmap[i - 1].count(a[i])) {
-      j = mmap[i - 1][a[i]];
-      if (j > 0) swap(mmap[i], mmap[j - 1]);
-    }
-    mmap[i][a[i]] = i;
-    if (j > 0) f[i] = f[j - 1] + 1;
-    ans += f[i];
+  REP(i, n - 1) {
+    int u, v, w;
+    scanf("%d%d%d", &u, &v, &w);
+    G[u].eb(v, w);
+    G[v].eb(u, w);
   }
-  printf("%lld\n", ans);
+  dfs(1, 0);
+  printf("%lld\n", max(f[1][0], f[1][1]));
 }
 
 int main() {
